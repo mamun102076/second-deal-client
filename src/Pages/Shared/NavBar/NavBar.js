@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const NavBar = () => {
     return (
-        <div className='bg-emerald-500'>
+        <div className='bg-gradient-to-r from-indigo-500 via-emerald-500 to-pink-500'>
             <div className="navbar max-w-7xl mx-auto text-white text-xl">
                 <div className="flex-1">
                     <Link className="btn btn-ghost normal-case text-xl">Second Deal</Link>
