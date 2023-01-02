@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 const NavBar = () => {
     return (
-        <div className='max-w-7xl mx-auto'>
-            <div className="navbar bg-base-100">
+        <div className='bg-emerald-500'>
+            <div className="navbar max-w-7xl mx-auto text-white text-xl">
                 <div className="flex-1">
                     <Link className="btn btn-ghost normal-case text-xl">Second Deal</Link>
                 </div>
