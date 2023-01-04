@@ -16,7 +16,7 @@ const ProductCategories = () => {
             <h1 className='text-4xl text-center font-bold'>Product Categories</h1>
             <div className='grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 justify-items-center max-w-7xl mx-auto mt-14 px-10'>
                 {
-                    categories.map(category => <CategoryCard key={category.id} category={category}></CategoryCard>)
+                    categories.map(category => <CategoryCard key={category._id} category={category}></CategoryCard>)
                 }
             </div>
         </div>
