@@ -1,11 +1,27 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../../Contexts/AuthProvider';
 
 const Login = () => {
-    const { register, handleSubmit } = useForm()
+    const { signIn } = useContext(AuthContext)
+    const { register,formState: {errors}, handleSubmit } = useForm()
+    const navigate=  useNavigate()
+    const [loginerror,setLoginerror] = useState('')
     const handleLogin = data => {
         console.log(data)
+        signIn(data.email,data.password)
+        .then(result => {
+            const user = result.user
+            console.log(user)
+            navigate('/')
+            toast.success('login successfull')
+        })
+        .catch(error => {
+            console.log(error)
+            setLoginerror(error.message)
+        })
     }
     return (
         <div className='h-[550px] flex justify-center items-center'>
@@ -16,14 +32,18 @@ const Login = () => {
                         <label className="label">
                             <span className="label-text">Email:</span>
                         </label>
-                        <input {...register("email")} type="text" placeholder="Type here" className="input input-bordered w-full" />
+                        <input {...register("email",{required: 'Email is required'})} type="text" placeholder="Type here" className="input input-bordered w-full" />
+                        {errors.email && <span className='text-red-500' role="alert">{errors.email.message}</span>}
                     </div>
                     <div className="form-control w-full">
                         <label className="label">
                             <span className="label-text">Password:</span>
                         </label>
-                        <input {...register("password")} type="password" placeholder="Type password" className="input input-bordered w-full" />
+                        <input {...register("password", 
+                        {required: 'password is required',minLength: {value: 9, message: 'password must be 9 digits'}})} type="password" placeholder="Type password" className="input input-bordered w-full" />
+                        {errors.password && <span className='text-red-500' role="alert">{errors.password.message}</span>}
                     </div>
+                    <p className='text-red-600'>{loginerror}</p>
                     <input className='btn w-full mt-4' type="submit" value="Login" />
                     <p className='mt-3'>New to this site? <Link to='/signup' className='text-secondary font-semibold'>create a new account</Link></p>
                 </form>
