@@ -1,10 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import NavBar from '../Pages/Shared/NavBar/NavBar';
 
 const DashboardLayout = () => {
     const menuItem = <>
-        <li><Link className='font-bold text-primary text-xl' to="/dashboard/myorder">My Orders</Link></li>
+        <li><Link className='font-bold text-primary text-xl' to="/dashboard">My Orders</Link></li>
         <li><Link className='font-bold text-primary text-xl' to="/dashboard/addproduct">Add Product</Link></li>
     </>
     return (
@@ -25,13 +25,11 @@ const DashboardLayout = () => {
                             </ul>
                         </div>
                     </div>
-                    {/* <!-- Page content here --> */}
-                    Content
+                    <Outlet></Outlet>
                 </div>
                 <div className="drawer-side">
                     <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
                     <ul className="menu p-4 w-80 bg-base-100">
-                        {/* <!-- Sidebar content here --> */}
                         {menuItem}
                     </ul>
                 </div>
