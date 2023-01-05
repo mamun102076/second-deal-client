@@ -6,6 +6,7 @@ const DashboardLayout = () => {
     const menuItem = <>
         <li><Link className='font-bold text-primary text-xl' to="/dashboard">My Orders</Link></li>
         <li><Link className='font-bold text-primary text-xl' to="/dashboard/addproduct">Add A Product</Link></li>
+        <li><Link className='font-bold text-primary text-xl' to="/dashboard/myproducts">My Products</Link></li>
     </>
     return (
         <div>

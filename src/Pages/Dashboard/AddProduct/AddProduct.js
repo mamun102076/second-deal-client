@@ -1,10 +1,36 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const AddProduct = () => {
     const { register, formState: { errors }, handleSubmit } = useForm()
+    const navigate = useNavigate()
     const handleAddProduct = data => {
         console.log(data)
+        const product = {
+            name: data.name,
+            price: data.price,
+            condtition: data.condition,
+            phone: data.phone,
+            location: data.location,
+            category: data.category,
+            purchaseYear: data.purchaseYear,
+            description: data.description
+        }
+        fetch('http://localhost:5000/products',{
+            method: 'POST',
+            headers: {
+                'content-type' : 'application/json'
+            },
+            body: JSON.stringify(product)
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+            toast.success('Product added successfully')
+            navigate('/dashboard/myproducts')
+        })
     }
     return (
         <div className='m-10 border-2 border-slate-300 p-10'>
@@ -62,8 +88,8 @@ const AddProduct = () => {
                     <label className="label">
                         <span className="label-text">Year of Purchase:</span>
                     </label>
-                    <input {...register("date", { required: 'Purchase year is required' })} type="text" placeholder="Enter Purchase year" className="input input-bordered w-full" />
-                    {errors.date && <span className='text-red-500' role="alert">{errors.date.message}</span>}
+                    <input {...register("purchaseYear", { required: 'Purchase year is required' })} type="text" placeholder="Enter Purchase year" className="input input-bordered w-full" />
+                    {errors.purchaseYear && <span className='text-red-500' role="alert">{errors.purchaseYear.message}</span>}
                 </div>
                 <div className="form-control max-w-sm">
                     <label className="label">
