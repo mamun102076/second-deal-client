@@ -50,7 +50,7 @@ const BookingModal = ({ card, setCard }) => {
                         <input type="text" name='name' placeholder="Type here" className="input input-bordered w-full mt-5" defaultValue={user?.displayName} disabled />
                         <input type="email" name='email' placeholder="Type here" className="input input-bordered w-full mt-5" defaultValue={user?.email} disabled />
                         <input type="text" name="productName" placeholder="Type here" className="input input-bordered w-full mt-5" defaultValue={card?.name} disabled />
-                        <input type="text" name="price" placeholder="Type here" className="input input-bordered w-full mt-5" defaultValue={`${card?.resalePrice}`} disabled />
+                        <input type="text" name="price" placeholder="Type here" className="input input-bordered w-full mt-5" defaultValue={card?.resalePrice} disabled />
                         <input type="text" name="location" placeholder="Type meeting location" className="input input-bordered w-full mt-5" required />
                         <input type="text" name="number" placeholder="Type phone number" className="input input-bordered w-full mt-5" required />
                         <input type="submit" className="btn w-full mt-5" />

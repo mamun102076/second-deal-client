@@ -7,46 +7,69 @@ import { AuthContext } from '../../../../Contexts/AuthProvider';
 
 const SignUp = () => {
     const { createUser, googleLogin, updateUser } = useContext(AuthContext)
-    const { register, formState: {errors}, handleSubmit } = useForm()
+    const { register, formState: { errors }, handleSubmit } = useForm()
     const googleProvider = new GoogleAuthProvider()
-    const navgate = useNavigate()
-    const [signupError,setSignupError] = useState('')
+    const navigate = useNavigate()
+    const [signupError, setSignupError] = useState('')
     const handleSignup = data => {
-        createUser(data.email,data.password)
-        .then(result => {
-            const user = result.user
-            console.log(user)
-            const userInfo = {
-                displayName: data.name
-            }
-            updateUser(userInfo)
-            .then(() => {
-                toast.success('signup successfull')
-                navgate('/')
+        createUser(data.email, data.password)
+            .then(result => {
+                const user = result.user
+                console.log(user)
+                const userInfo = {
+                    displayName: data.name
+                }
+                updateUser(userInfo)
+                    .then(() => {
+                        saveUser(data.name, data.email, data.select)
+                    })
+                    .catch(error => {
+                        console.log(error)
+                        setSignupError(error.message)
+                    })
             })
             .catch(error => {
                 console.log(error)
                 setSignupError(error.message)
             })
-        })
-        .catch(error => {
-            console.log(error)
-            setSignupError(error.message)
-        })
     }
+
     const handleGoogleSignup = () => {
         googleLogin(googleProvider)
-        .then(result => {
-            const user = result.user
-            console.log(user)
-            toast.success('signup successfull')
-            navgate('/')
-        })
-        .catch(error => {
-            console.log(error)
-            setSignupError(error.message)
-        })
+            .then(result => {
+                const user = result.user
+                console.log(user)
+                saveUser(user.displayName,user.email,user.uid)
+            })
+            .catch(error => {
+                console.log(error)
+                setSignupError(error.message)
+            })
     }
+
+    const saveUser = (name, email, providerId) => {
+        const user = {
+            name,
+            email,
+            providerId
+        }
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(console.log(data))
+                if (data.acknowledged) {
+                    toast.success('signup successfull')
+                    navigate('/')
+                }
+            })
+    }
+
     return (
         <div className='h-[700px] flex justify-center items-center'>
             <div className='w-96 border-2 border-slate-300  px-5 py-10'>
@@ -56,27 +79,27 @@ const SignUp = () => {
                         <label className="label">
                             <span className="label-text">Name:</span>
                         </label>
-                        <input {...register("name",{required: 'Name is required'})} type="text" placeholder="Type here" className="input input-bordered w-full" />
+                        <input {...register("name", { required: 'Name is required' })} type="text" placeholder="Type here" className="input input-bordered w-full" />
                         {errors.name && <span className='text-red-500' role="alert">{errors.name.message}</span>}
                     </div>
                     <div className="form-control w-full">
                         <label className="label">
                             <span className="label-text">Email:</span>
                         </label>
-                        <input {...register("email",{required: 'Email is required'})} type="text" placeholder="Type here" className="input input-bordered w-full" />
+                        <input {...register("email", { required: 'Email is required' })} type="text" placeholder="Type here" className="input input-bordered w-full" />
                         {errors.email && <span className='text-red-500' role="alert">{errors.email.message}</span>}
                     </div>
                     <div className="form-control w-full">
                         <label className="label">
                             <span className="label-text">Password:</span>
                         </label>
-                        <input {...register("password", 
-                        {required: 'password is required',minLength: {value: 9, message: 'password must be 9 digits'}})} type="password" placeholder="Type password" className="input input-bordered w-full" />
+                        <input {...register("password",
+                            { required: 'password is required', minLength: { value: 9, message: 'password must be 9 digits' } })} type="password" placeholder="Type password" className="input input-bordered w-full" />
                         {errors.password && <span className='text-red-500' role="alert">{errors.password.message}</span>}
                     </div>
                     <select {...register("select")} className="select select-bordered select-secondary w-full mt-6">
-                        <option value="user">User</option>
-                        <option value="seller">Seller</option>
+                        <option value="user">user/buyer</option>
+                        <option value="seller">seller</option>
                     </select>
                     <p className='text-red-600'>{signupError}</p>
                     <input className='btn w-full mt-6' type="submit" value="Signup" />
