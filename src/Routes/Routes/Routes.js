@@ -4,6 +4,7 @@ import DashboardLayout from '../../Layout/DashboardLayout';
 import Main from '../../Layout/Main';
 import AddProduct from '../../Pages/Dashboard/AddProduct/AddProduct';
 import AllBuyers from '../../Pages/Dashboard/AllBuyers/AllBuyers';
+import AllSellers from '../../Pages/Dashboard/AllSellers/AllSellers';
 import MyOrders from '../../Pages/Dashboard/MyOrders/MyOrders';
 import MyProducts from '../../Pages/Dashboard/MyProducts/MyProducts';
 import CategoryDetails from '../../Pages/Home/CategoryDetails/CategoryDetails';
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/allbuyers',
                 element: <AllBuyers></AllBuyers>
+            },
+            {
+                path: '/dashboard/allsellers',
+                element: <AllSellers></AllSellers>
             }
         ]
     }
