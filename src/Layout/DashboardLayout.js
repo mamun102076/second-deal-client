@@ -9,6 +9,7 @@ const DashboardLayout = () => {
         <li><Link className='font-bold text-primary text-xl' to="/dashboard/myproducts">My Products</Link></li>
         <li><Link className='font-bold text-primary text-xl' to="/dashboard/allbuyers">All Buyers</Link></li>
         <li><Link className='font-bold text-primary text-xl' to="/dashboard/allsellers">All Sellers</Link></li>
+        <li><Link className='font-bold text-primary text-xl' to="/dashboard/makeadmin">Make Admin</Link></li>
     </>
     return (
         <div>
