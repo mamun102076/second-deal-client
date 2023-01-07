@@ -13,13 +13,11 @@ const AllBuyers = () => {
     })
 
     const handleBuyerDelete = id => {
-        console.log(id)
         fetch(`http://localhost:5000/buyers/${id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 if (data.deletedCount > 0) {
                     toast.success('buyer deleted successfull')
                     refetch()
