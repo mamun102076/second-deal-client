@@ -1,15 +1,32 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import React from 'react';
+import { toast } from 'react-hot-toast';
 
 const AllBuyers = () => {
-    const [buyers, setBuyers] = useState([])
-    useEffect(() => {
-        axios.get('http://localhost:5000/buyers')
-            .then(response => {
-                console.log(response.data)
-                setBuyers(response.data)
+    const { data: buyers = [], refetch } = useQuery({
+        queryKey: ['buyers'],
+        queryFn: async () => {
+            const res = await fetch('http://localhost:5000/buyers')
+            const data = await res.json()
+            return data
+        }
+    })
+
+    const handleBuyerDelete = id => {
+        console.log(id)
+        fetch(`http://localhost:5000/buyers/${id}`, {
+            method: 'DELETE'
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if (data.deletedCount > 0) {
+                    toast.success('buyer deleted successfull')
+                    refetch()
+                }
             })
-    }, [])
+    }
+
     return (
         <div className="overflow-x-auto mx-10">
             <table className="table w-full">
@@ -22,11 +39,12 @@ const AllBuyers = () => {
                 </thead>
                 <tbody>
                     {
-                        buyers.map((buyer,i) =>
-                            <tr>
-                                <th>{i+1}</th>
+                        buyers.map((buyer, i) =>
+                            <tr key={i}>
+                                <th>{i + 1}</th>
                                 <td>{buyer.name}</td>
                                 <td>{buyer.email}</td>
+                                <td><button onClick={() => handleBuyerDelete(buyer._id)} className="btn btn-error btn-xs">Delete</button></td>
                             </tr>)
                     }
                 </tbody>
