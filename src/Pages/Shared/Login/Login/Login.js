@@ -4,28 +4,37 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../../Contexts/AuthProvider';
+import useToken from '../../../hooks/useToken';
 
 const Login = () => {
     const { signIn, googleLogin } = useContext(AuthContext)
-    const { register,formState: {errors}, handleSubmit } = useForm()
+    const { register, formState: { errors }, handleSubmit } = useForm()
     const googleProvider = new GoogleAuthProvider()
     const navigate = useNavigate()
     const locationa = useLocation()
-    const from = locationa.state?.from?.pathname || '/' 
-    const [loginerror,setLoginerror] = useState('')
+    const from = locationa.state?.from?.pathname || '/'
+    const [loginerror, setLoginerror] = useState('')
+    const [userLoginEmail, setUserLoginEmail] = useState('')
+    const [token] = useToken(userLoginEmail)
+
+    if (token) {
+        toast.success('signup successfull')
+        navigate(from, { replace: true })
+    }
+
     const handleLogin = data => {
         console.log(data)
-        signIn(data.email,data.password)
-        .then(result => {
-            const user = result.user
-            console.log(user)
-            navigate(from, {replace: true})
-            toast.success('login successfull')
-        })
-        .catch(error => {
-            console.log(error)
-            setLoginerror(error.message)
-        })
+        signIn(data.email, data.password)
+            .then(result => {
+                const user = result.user
+                console.log(user)
+                setUserLoginEmail(data.email)
+                toast.success('login successfull')
+            })
+            .catch(error => {
+                console.log(error)
+                setLoginerror(error.message)
+            })
     }
 
     const handleGoogleLogin = () => {
@@ -33,7 +42,7 @@ const Login = () => {
             .then(result => {
                 const user = result.user
                 console.log(user)
-                saveUser(user.displayName,user.email,user.uid)
+                saveUser(user.displayName, user.email, user.uid)
             })
             .catch(error => {
                 console.log(error)
@@ -58,8 +67,7 @@ const Login = () => {
             .then(data => {
                 console.log(console.log(data))
                 if (data.acknowledged) {
-                    toast.success('signup successfull')
-                    navigate('/')
+                    setUserLoginEmail(email)
                 }
             })
     }
@@ -73,15 +81,15 @@ const Login = () => {
                         <label className="label">
                             <span className="label-text">Email:</span>
                         </label>
-                        <input {...register("email",{required: 'Email is required'})} type="text" placeholder="Type here" className="input input-bordered w-full" />
+                        <input {...register("email", { required: 'Email is required' })} type="text" placeholder="Type here" className="input input-bordered w-full" />
                         {errors.email && <span className='text-red-500' role="alert">{errors.email.message}</span>}
                     </div>
                     <div className="form-control w-full">
                         <label className="label">
                             <span className="label-text">Password:</span>
                         </label>
-                        <input {...register("password", 
-                        {required: 'password is required',minLength: {value: 9, message: 'password must be 9 digits'}})} type="password" placeholder="Type password" className="input input-bordered w-full" />
+                        <input {...register("password",
+                            { required: 'password is required', minLength: { value: 9, message: 'password must be 9 digits' } })} type="password" placeholder="Type password" className="input input-bordered w-full" />
                         {errors.password && <span className='text-red-500' role="alert">{errors.password.message}</span>}
                     </div>
                     <p className='text-red-600'>{loginerror}</p>

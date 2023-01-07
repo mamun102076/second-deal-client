@@ -32,6 +32,7 @@ const AllSellers = () => {
                         <th></th>
                         <th>Name</th>
                         <th>Email</th>
+                        <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>

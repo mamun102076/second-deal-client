@@ -53,7 +53,7 @@ const MakeAdmin = () => {
                         </thead>
                         <tbody>
                             {
-                                sellers.map((seller, i) =>
+                                sellers?.map((seller, i) =>
                                     <tr>
                                         <th>{i + 1}</th>
                                         <td>{seller.name}</td>
@@ -83,7 +83,7 @@ const MakeAdmin = () => {
                         </thead>
                         <tbody>
                             {
-                                buyers.map((buyer, i) =>
+                                buyers?.map((buyer, i) =>
                                     <tr>
                                         <th>{i + 1}</th>
                                         <td>{buyer.name}</td>

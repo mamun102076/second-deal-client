@@ -1,13 +1,18 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useContext } from 'react';
+import { AuthContext } from '../../../Contexts/AuthProvider';
 
 const MyOrders = () => {
-
+    const { user } = useContext(AuthContext)
     const { data: bookings = [] } = useQuery({
-        queryKey: ['bookings'],
+        queryKey: ['bookings', user?.email],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/booking')
-            const data = res.json()
+            const res = await fetch(`http://localhost:5000/booking?email=${user?.email}`,{
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('accessToken')}`
+                }
+            })
+            const data = await res.json()
             return data
         }
     })
@@ -28,7 +33,7 @@ const MyOrders = () => {
                 </thead>
                 <tbody>
                     {
-                        bookings.map((booking,i) =>
+                        bookings?.map((booking,i) =>
                             <tr key={i}>
                                 <th>{i+1}</th>
                                 <td>{booking.name}</td>
