@@ -1,15 +1,35 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, Outlet } from 'react-router-dom';
+import { AuthContext } from '../Contexts/AuthProvider';
+import useAdmin from '../Pages/hooks/useAdmin';
+import useBuyer from '../Pages/hooks/useBuyer';
+import useSeller from '../Pages/hooks/useSeller';
 import NavBar from '../Pages/Shared/NavBar/NavBar';
 
 const DashboardLayout = () => {
+    const { user } = useContext(AuthContext)
+    const [isAdmin] = useAdmin(user?.email)
+    const [isBuyer] = useBuyer(user?.email)
+    const [isSeller] = useSeller(user?.email)
     const menuItem = <>
-        <li><Link className='font-bold text-primary text-xl' to="/dashboard">My Orders</Link></li>
-        <li><Link className='font-bold text-primary text-xl' to="/dashboard/addproduct">Add A Product</Link></li>
-        <li><Link className='font-bold text-primary text-xl' to="/dashboard/myproducts">My Products</Link></li>
-        <li><Link className='font-bold text-primary text-xl' to="/dashboard/allbuyers">All Buyers</Link></li>
-        <li><Link className='font-bold text-primary text-xl' to="/dashboard/allsellers">All Sellers</Link></li>
-        <li><Link className='font-bold text-primary text-xl' to="/dashboard/makeadmin">Make Admin</Link></li>
+        {
+            isBuyer && <li><Link className='font-bold text-primary text-xl' to="/dashboard">My Orders</Link></li>
+        }
+        {
+            isSeller &&
+            <>
+                <li><Link className='font-bold text-primary text-xl' to="/dashboard/addproduct">Add A Product</Link></li>
+                <li><Link className='font-bold text-primary text-xl' to="/dashboard/myproducts">My Products</Link></li>
+            </>
+        }
+        {
+            isAdmin &&
+            <>
+                <li><Link className='font-bold text-primary text-xl' to="/dashboard/allbuyers">All Buyers</Link></li>
+                <li><Link className='font-bold text-primary text-xl' to="/dashboard/allsellers">All Sellers</Link></li>
+                <li><Link className='font-bold text-primary text-xl' to="/dashboard/makeadmin">Make Admin</Link></li>
+            </>
+        }
     </>
     return (
         <div>
