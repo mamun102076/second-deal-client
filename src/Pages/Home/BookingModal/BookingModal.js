@@ -8,6 +8,7 @@ const BookingModal = ({ card, setCard }) => {
         event.preventDefault()
         const form = event.target
         const name = form.name.value
+        const image = form.image.value
         const email = form.email.value
         const productName = form.productName.value
         const price = form.price.value
@@ -17,6 +18,7 @@ const BookingModal = ({ card, setCard }) => {
 
         const booking = {
             name,
+            image,
             email,
             productName,
             price,
@@ -48,6 +50,7 @@ const BookingModal = ({ card, setCard }) => {
                     <h3 className="text-lg font-bold mt-6">{card?.name}</h3>
                     <form onSubmit={handleSubmit}>
                         <input type="text" name='name' placeholder="Type here" className="input input-bordered w-full mt-5" defaultValue={user?.displayName} disabled />
+                        <input type="text" name='image' placeholder="Type here" className="input input-bordered w-full mt-5" defaultValue={card?.url} disabled />
                         <input type="email" name='email' placeholder="Type here" className="input input-bordered w-full mt-5" defaultValue={user?.email} disabled />
                         <input type="text" name="productName" placeholder="Type here" className="input input-bordered w-full mt-5" defaultValue={card?.name} disabled />
                         <input type="text" name="price" placeholder="Type here" className="input input-bordered w-full mt-5" defaultValue={card?.resalePrice} disabled />

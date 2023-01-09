@@ -8,6 +8,7 @@ import AllSellers from '../../Pages/Dashboard/AllSellers/AllSellers';
 import MakeAdmin from '../../Pages/Dashboard/MakeAdmin/MakeAdmin';
 import MyOrders from '../../Pages/Dashboard/MyOrders/MyOrders';
 import MyProducts from '../../Pages/Dashboard/MyProducts/MyProducts';
+import Payment from '../../Pages/Dashboard/Payment/Payment';
 import CategoryDetails from '../../Pages/Home/CategoryDetails/CategoryDetails';
 import Home from '../../Pages/Home/Home/Home';
 import Login from '../../Pages/Shared/Login/Login/Login';
@@ -64,11 +65,15 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/allsellers',
                 element: <AllSellers></AllSellers>
-            }
-            ,
+            },
             {
                 path: '/dashboard/makeadmin',
                 element: <MakeAdmin></MakeAdmin>
+            },
+            {
+                path: '/dashboard/payment/:id',
+                element: <Payment></Payment>,
+                loader: ({params}) => fetch(`http://localhost:5000/payment/${params.id}`) 
             }
         ]
     }
