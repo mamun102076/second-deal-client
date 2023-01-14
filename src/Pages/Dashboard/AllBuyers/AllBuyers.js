@@ -6,11 +6,17 @@ const AllBuyers = () => {
     const { data: buyers = [], refetch } = useQuery({
         queryKey: ['buyers'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/buyers')
+            const res = await fetch('http://localhost:5000/buyers',{
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('accessToken')}`
+                }
+            })
             const data = await res.json()
             return data
         }
     })
+
+    
 
     const handleBuyerDelete = id => {
         fetch(`http://localhost:5000/buyers/${id}`, {
@@ -41,7 +47,7 @@ const AllBuyers = () => {
                 </thead>
                 <tbody>
                     {
-                        buyers.map((buyer, i) =>
+                        buyers?.map((buyer, i) =>
                             <tr key={i}>
                                 <th>{i + 1}</th>
                                 <td>{buyer.name}</td>

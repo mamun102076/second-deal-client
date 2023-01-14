@@ -11,25 +11,27 @@ const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm()
     const googleProvider = new GoogleAuthProvider()
     const navigate = useNavigate()
-    const locationa = useLocation()
-    const from = locationa.state?.from?.pathname || '/'
+    const location = useLocation()
+    const from = location.state?.from?.pathname || '/'
     const [loginerror, setLoginerror] = useState('')
     const [userLoginEmail, setUserLoginEmail] = useState('')
     const [token] = useToken(userLoginEmail)
+    // const [loading,setLoading] = useState(false)
 
     if (token) {
-        toast.success('signup successfull')
+        toast.success('login successfull')
         navigate(from, { replace: true })
+        // setLoading(false)
     }
 
     const handleLogin = data => {
+        // setLoading(true)
         console.log(data)
         signIn(data.email, data.password)
             .then(result => {
                 const user = result.user
                 console.log(user)
                 setUserLoginEmail(data.email)
-                toast.success('login successfull')
             })
             .catch(error => {
                 console.log(error)
@@ -42,7 +44,7 @@ const Login = () => {
             .then(result => {
                 const user = result.user
                 console.log(user)
-                saveUser(user.displayName, user.email, user.uid)
+                saveUser(user?.displayName, user?.email, user?.uid)
             })
             .catch(error => {
                 console.log(error)
@@ -71,6 +73,13 @@ const Login = () => {
                 }
             })
     }
+
+    console.log({token})
+
+    
+
+    
+
 
     return (
         <div className='h-[550px] flex justify-center items-center'>

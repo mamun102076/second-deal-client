@@ -2,9 +2,9 @@ import React, { useContext } from 'react';
 import { toast } from 'react-hot-toast';
 import { AuthContext } from '../../../Contexts/AuthProvider';
 
-const BookingModal = ({ card, setCard }) => {
+const AdvertiseModal = ({card, setCard }) => {
     const { user } = useContext(AuthContext)
-    const { _id, productName, image, resalePrice } = card
+    const {_id,productName,image,resalePrice} = card
     const handleSubmit = event => {
         event.preventDefault()
         const form = event.target
@@ -36,14 +36,9 @@ const BookingModal = ({ card, setCard }) => {
         })
             .then(res => res.json())
             .then(data => {
-                if (data.acknowledged) {
-                    console.log(data)
-                    toast.success('boking successfull')
-                    setCard(null)
-                }else{
-                    toast.error(data.message)
-                    setCard(null)
-                }
+                console.log(data)
+                toast.success('boking successfull')
+                setCard(null)
             })
     }
     return (
@@ -98,4 +93,4 @@ const BookingModal = ({ card, setCard }) => {
     );
 };
 
-export default BookingModal;
+export default AdvertiseModal;

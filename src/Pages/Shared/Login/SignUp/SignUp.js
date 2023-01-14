@@ -48,7 +48,7 @@ const SignUp = () => {
             .then(result => {
                 const user = result.user
                 console.log(user)
-                saveUser(user.displayName, user.email, user.uid)
+                saveUser(user?.displayName, user?.email, user?.uid)
             })
             .catch(error => {
                 console.log(error)

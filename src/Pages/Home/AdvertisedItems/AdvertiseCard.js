@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import BookingModal from '../BookingModal/BookingModal';
+import AdvertiseModal from './AdvertiseModal';
 
-const CategoryDetailCard = ({ category }) => {
-    const { _id, image, productName, location, resalePrice, originalPrice, condtition, date, sellerName, phone, categoryName, usedYear, description } = category
+const AdvertiseCard = ({ advertise }) => {
+    console.log(advertise)
+    const { _id, image, productName, location, resalePrice, originalPrice, condtition, date, sellerName, phone, categoryName, usedYear, description } = advertise
     const [card,setCard] = useState([])
-
     return (
         <div className="card bg-base-100 shadow-xl m-6">
             <figure><img src={image} alt="Shoes" /></figure>
@@ -21,14 +21,14 @@ const CategoryDetailCard = ({ category }) => {
                 <p><span className='font-bold'>Description:</span> {description}</p>
                 <p><span className='font-bold'>Date:</span> {date}</p>
                 <div className="card-actions justify-center">
-                    <label onClick={() => setCard(category)} htmlFor={`${_id}`} className="btn btn-primary mt-6">Book Now</label>
+                    <label onClick={() => setCard(advertise)} htmlFor={`${_id}`} className="btn btn-primary mt-6">Book Now</label>
                 </div>
             </div>
             {
-                card && <BookingModal card={card} setCard={setCard}></BookingModal>
+                card && <AdvertiseModal key={card._id} card={card} setCard={setCard}></AdvertiseModal>
             }
         </div>
     );
 };
 
-export default CategoryDetailCard;
+export default AdvertiseCard;

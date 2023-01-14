@@ -1,9 +1,8 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useEffect, useState } from 'react';
-import { json } from 'react-router-dom';
 
 const CheckoutForm = ({ data }) => {
-    const { _id, name, email, price } = data
+    const { userName, price, _id, email } = data
     const stripe = useStripe()
     const elements = useElements()
     const [cardError, setCardError] = useState('')
@@ -41,19 +40,19 @@ const CheckoutForm = ({ data }) => {
             type: 'card',
             card,
         });
-
+        
         if (error) {
             console.log(error);
             setCardError(error.message)
         }
-
+        setCardError('')
         const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(
             clientSecret,
             {
                 payment_method: {
                     card: card,
                     billing_details: {
-                        name,
+                        name: userName,
                         email
                     },
                 },
@@ -66,9 +65,9 @@ const CheckoutForm = ({ data }) => {
 
         if (paymentIntent.status === "succeeded") {
             const payment = {
-                name,
+                userName: userName,
                 price,
-                transcationId: paymentIntent.id,
+                transactionId: paymentIntent.id,
                 bookingId: _id
             }
             fetch('http://localhost:5000/payment', {

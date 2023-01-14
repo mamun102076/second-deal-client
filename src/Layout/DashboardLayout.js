@@ -13,7 +13,7 @@ const DashboardLayout = () => {
     const [isSeller] = useSeller(user?.email)
     const menuItem = <>
         {
-            isBuyer && <li><Link className='font-bold text-primary text-xl' to="/dashboard">My Orders</Link></li>
+            isBuyer && <li><Link className='font-bold text-primary text-xl' to="/dashboard/myorders">My Orders</Link></li>
         }
         {
             isSeller &&
@@ -38,7 +38,7 @@ const DashboardLayout = () => {
                 <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content flex flex-col">
                     <div className="w-full navbar bg-base-300">
-                        <div className="flex-none hidden lg:block mx-auto">
+                        <div className="flex-none hidden sm:block mx-auto">
                             <ul className="menu menu-horizontal">
                                 {menuItem}
                             </ul>
