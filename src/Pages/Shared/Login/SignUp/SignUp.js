@@ -62,7 +62,7 @@ const SignUp = () => {
             email,
             providerId
         }
-        fetch('http://localhost:5000/users', {
+        fetch('https://second-deal-server.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

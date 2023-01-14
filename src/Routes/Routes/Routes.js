@@ -35,7 +35,7 @@ const router = createBrowserRouter([
             {
                 path: '/category/:name',
                 element: <PrivateRoute><CategoryDetails></CategoryDetails></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/products/category/${params.name}`)
+                loader: ({ params }) => fetch(`https://second-deal-server.vercel.app/products/category/${params.name}`)
             },
             {
                 path: '/signup',
@@ -86,7 +86,7 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/payment/:id',
                 element: <Payment></Payment>,
-                loader: ({params}) => fetch(`http://localhost:5000/payment/${params.id}`) 
+                loader: ({params}) => fetch(`https://second-deal-server.vercel.app/payment/${params.id}`) 
             }
         ]
     }

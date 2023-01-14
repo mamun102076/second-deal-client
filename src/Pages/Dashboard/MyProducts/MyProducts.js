@@ -6,7 +6,7 @@ const MyProducts = () => {
     const { data: products = [], refetch } = useQuery({
         queryKey: ['products'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/products', {
+            const res = await fetch('https://second-deal-server.vercel.app/products', {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
                 }
@@ -18,7 +18,7 @@ const MyProducts = () => {
 
 
     const handleDeleteProduct = id => {
-        fetch(`http://localhost:5000/products/${id}`, {
+        fetch(`https://second-deal-server.vercel.app/products/${id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -51,7 +51,7 @@ const MyProducts = () => {
             description: data.description,
             date: data.date
         }
-        fetch('http://localhost:5000/advertise', {
+        fetch('https://second-deal-server.vercel.app/advertise', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

@@ -7,7 +7,7 @@ const MakeAdmin = () => {
     const { data: sellers = [] } = useQuery({
         queryKey: ['sellers'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/seller')
+            const res = await fetch('https://second-deal-server.vercel.app/seller')
             const data = await res.json()
             return data
         }
@@ -16,7 +16,7 @@ const MakeAdmin = () => {
     const { data: buyers = [], refetch } = useQuery({
         queryKey: ['buyers'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/buyers')
+            const res = await fetch('https://second-deal-server.vercel.app/buyers')
             const data = await res.json()
             return data
         }
@@ -24,7 +24,7 @@ const MakeAdmin = () => {
 
     const handleMakeAdmin = id => {
         console.log(id)
-        fetch(`http://localhost:5000/users/admin/${id}`,{
+        fetch(`https://second-deal-server.vercel.app/users/admin/${id}`,{
             method: 'PUT',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`

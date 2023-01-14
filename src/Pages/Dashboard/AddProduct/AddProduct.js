@@ -26,7 +26,7 @@ const AddProduct = () => {
             usedYear: data.usedYear,
             description: data.description
         }
-        fetch('http://localhost:5000/products',{
+        fetch('https://second-deal-server.vercel.app/products',{
             method: 'POST',
             headers: {
                 'content-type' : 'application/json'

@@ -11,7 +11,7 @@ const CheckoutForm = ({ data }) => {
     const [transcationId, setTranscationId] = useState("");
 
     useEffect(() => {
-        fetch("http://localhost:5000/create-payment-intent", {
+        fetch("https://second-deal-server.vercel.app/create-payment-intent", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -70,7 +70,7 @@ const CheckoutForm = ({ data }) => {
                 transactionId: paymentIntent.id,
                 bookingId: _id
             }
-            fetch('http://localhost:5000/payment', {
+            fetch('https://second-deal-server.vercel.app/payment', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'

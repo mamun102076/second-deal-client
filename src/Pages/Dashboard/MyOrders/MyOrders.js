@@ -9,7 +9,7 @@ const MyOrders = () => {
     const { data: bookings = [], refetch } = useQuery({
         queryKey: ['bookings', user?.email],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/booking?email=${user?.email}`, {
+            const res = await fetch(`https://second-deal-server.vercel.app/booking?email=${user?.email}`, {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
                 }
@@ -20,7 +20,7 @@ const MyOrders = () => {
     })
 
     const handleDeleteOrder = id => {
-        fetch(`http://localhost:5000/booking/${id}`, {
+        fetch(`https://second-deal-server.vercel.app/booking/${id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
