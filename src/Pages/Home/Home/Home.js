@@ -14,7 +14,6 @@ const Home = () => {
             return data
         } 
     })
-    console.log(data)
     
     return (
         <div>

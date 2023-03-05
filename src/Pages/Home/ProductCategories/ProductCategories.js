@@ -18,7 +18,7 @@ const ProductCategories = () => {
     return (
         <div className='bg-green-100 py-16'>
             <h1 className='text-4xl text-center font-bold'>Product Categories</h1>
-            <div className='grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 justify-items-center max-w-7xl mx-auto mt-14 px-10'>
+            <div className='grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 mt-14 gap-5 mx-10'>
                 {
                     categories.map(category => <CategoryCard key={category._id} category={category}></CategoryCard>)
                 }

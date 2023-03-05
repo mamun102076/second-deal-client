@@ -9,7 +9,6 @@ const useAdmin = email => {
             fetch(`https://second-deal-server.vercel.app/user/admin/${email}`)
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data)
                     setIsAdmin(data.isAdmin)
                     setIsAdminLoading(false)
                 })

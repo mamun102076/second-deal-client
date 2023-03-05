@@ -65,7 +65,7 @@ const AllSellers = () => {
                 <tbody>
                     {
                         sellers?.map((seller, i) =>
-                            <tr>
+                            <tr key={seller._id}>
                                 <th>{i + 1}</th>
                                 <td className='flex'>{seller.name}{seller?.verification &&<CheckmarkIcon className="h-6 w-6 text-blue-500"/>}</td>
                                 <td>{seller.email}</td>

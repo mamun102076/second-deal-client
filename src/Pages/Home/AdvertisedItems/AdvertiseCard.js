@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import AdvertiseModal from './AdvertiseModal';
 
 const AdvertiseCard = ({ advertise }) => {
-    console.log(advertise)
     const { _id, image, productName, location, resalePrice, originalPrice, condtition, date, sellerName, phone, categoryName, usedYear, description } = advertise
     const [card,setCard] = useState([])
     return (
-        <div className="card bg-base-100 shadow-xl m-6">
+        <div className="card bg-base-100 shadow-xl m-3">
             <figure><img src={image} alt="Shoes" /></figure>
             <div className="card-body">
                 <h2 className="card-title mb-3">{productName}</h2>

@@ -57,7 +57,7 @@ const MakeAdmin = () => {
                         <tbody>
                             {
                                 sellers?.map((seller, i) =>
-                                    <tr>
+                                    <tr key={seller._id}>
                                         <th>{i + 1}</th>
                                         <td>{seller.name}</td>
                                         <td>{seller.email}</td>
@@ -87,7 +87,7 @@ const MakeAdmin = () => {
                         <tbody>
                             {
                                 buyers?.map((buyer, i) =>
-                                    <tr>
+                                    <tr key={buyer._id}>
                                         <th>{i + 1}</th>
                                         <td>{buyer.name}</td>
                                         <td>{buyer.email}</td>

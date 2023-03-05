@@ -38,7 +38,7 @@ const DashboardLayout = () => {
                 <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content flex flex-col">
                     <div className="w-full navbar bg-base-300">
-                        <div className="flex-none hidden sm:block mx-auto">
+                        <div className="flex-none hidden lg:block md:block mx-auto">
                             <ul className="menu menu-horizontal">
                                 {menuItem}
                             </ul>
@@ -48,7 +48,7 @@ const DashboardLayout = () => {
                 </div>
                 <div className="drawer-side">
                     <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
-                    <ul className="menu p-4 w-80 bg-base-100">
+                    <ul className="menu p-4 w-48 bg-base-100">
                         {menuItem}
                     </ul>
                 </div>

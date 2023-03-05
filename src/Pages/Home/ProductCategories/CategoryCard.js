@@ -5,7 +5,7 @@ const CategoryCard = ({ category }) => {
     const { category_name } = category
     return (
         <div>
-            <div className="card w-96 bg-base-100 shadow-xl mb-6">
+            <div className="card bg-base-100 shadow-xl mb-6">
                 <div className="card-body">
                     <p className='text-center text-3xl font-bold'>{category_name}</p>
                     <div className="card-actions justify-center">

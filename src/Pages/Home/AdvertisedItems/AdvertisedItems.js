@@ -14,7 +14,7 @@ const AdvertisedItems = () => {
 
 
     return (
-        <div className='bg-green-300 p-8'>
+        <div className='bg-green-300 p-4'>
             <h1 className='text-4xl font-semibold text-center mb-10 mt-5'>Advertised Items</h1>
             <div className='grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1'>
                 {

@@ -15,7 +15,7 @@ const RatioBar = () => {
                 </div>
                 <div>
                     <div className="radial-progress" style={{ "--value": "60", "--size": "14rem", "--thickness": "2px"  ,"color": 'red'}}>60%</div>
-                    <p className='font-bold text-2xl'>ASUS</p>
+                    <p className='font-bold text-2xl my-4'>ASUS</p>
                 </div>
             </div>
         </div>
